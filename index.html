@@ -84,7 +84,7 @@ img,canvas{max-width:100%;display:block;}
 /* ============================================================
    1. HERO — bone plate
    ============================================================ */
-.hero{position:relative;padding-block:clamp(1.75rem,4vw,3rem) clamp(3.5rem,7vw,6rem);overflow:hidden;}
+.hero{position:relative;padding-block:clamp(1.75rem,4vw,3rem) clamp(2.5rem,5vw,4.5rem);overflow:hidden;}
 .rail{
   display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
   padding-block:1.1rem;border-bottom:1px solid rgba(31,28,27,.22);color:var(--stone);
@@ -102,13 +102,65 @@ img,canvas{max-width:100%;display:block;}
 }
 
 .hero-grid{
-  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);
-  gap:clamp(2.5rem,5vw,5rem);align-items:end;padding-top:clamp(2.5rem,6vw,5rem);
+  display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+  gap:clamp(2.5rem,4vw,4.25rem);align-items:center;padding-top:clamp(1.75rem,3.5vw,3.25rem);
 }
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr;align-items:start;}}
 .hero-eyebrow{display:flex;align-items:center;gap:.7rem;color:var(--stone);margin-bottom:clamp(1.25rem,2.5vw,2rem);}
 .hero-body{display:grid;gap:clamp(1.5rem,3vw,2.25rem);margin-top:clamp(.75rem,1.2vw,1.1rem);}
 .hero-lede{color:#4A423C;max-width:44ch;border-left:2px solid var(--ochre);padding-left:1.35rem;}
+
+/* ---------- the halftone portrait ---------- */
+.portrait{position:relative;justify-self:end;width:100%;}
+@media (min-width:901px){
+  .portrait{max-width:calc((100vh - 15rem) * .8);}
+}
+/* Ink 2 laid down first, off register — a flat plate behind ink 1. */
+.plate-ghost{
+  position:absolute;inset:0;
+  transform:translate(16px,16px);
+  border-radius:4px;
+  background:var(--ochre);
+  pointer-events:none;
+}
+.plate{
+  position:relative;
+  aspect-ratio:4/5;
+  border-radius:4px;
+  overflow:hidden;
+  background:var(--paper-2);
+}
+.plate img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 14%;
+}
+.portrait-cap{
+  position:absolute;left:0;bottom:0;z-index:3;
+  display:flex;align-items:center;gap:.6rem;
+  padding:.55rem 1rem;background:var(--ox);color:var(--paper);
+  border-top-right-radius:8px;
+}
+
+/* ============================================================
+   2. MARQUEE — oxblood plate, knockout type
+   ============================================================ */
+.marquee{
+  position:relative;background:var(--ox);color:var(--paper);
+  padding-block:1.15rem;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
+}
+.marquee-track{position:relative;z-index:2;display:flex;width:max-content;animation:slide 42s linear infinite;}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+.marquee-set{display:flex;align-items:center;gap:2.4rem;padding-right:2.4rem;}
+.marquee-set span{white-space:nowrap;}
+.marquee-set .sep{color:var(--ochre-pale);}
+@keyframes slide{to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion:reduce){
+  .marquee-track{animation:none;}
+  .marquee{-webkit-mask-image:none;mask-image:none;}
+}
+
 
 
 /* ============================================================
@@ -217,7 +269,7 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
           <span>Digital Marketing</span><span>&bull;</span><span>Brand &amp; Web Design</span><span>&bull;</span><span>Print &amp; Packaging</span>
         </div>
 
-        <h1 class="display display-locked" style="font-size:clamp(2.3rem,5.1vw,4.6rem)">
+        <h1 class="display display-locked" style="font-size:clamp(2.2rem,4.35vw,3.9rem)">
           John Caviness is a marketing and graphic design specialist
           <span class="ink-accent">based in Denver, CO.</span>
         </h1>
