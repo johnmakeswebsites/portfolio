@@ -1,6 +1,8 @@
 # portfolio
 
-Personal site for John Caviness — marketing and design, Denver CO.
+Personal site. Rebuilding from scratch.
 
-Static single-page site. No build step, no dependencies: open `index.html`
-in a browser, or serve the directory with any static host.
+- `portrait.jpg` — photo (the only real asset carried over)
+- `.github/workflows/pages.yml` — deploys `main` to GitHub Pages on push
+
+Previous iteration is preserved on the `archive/v1-2026-08-24` branch.
