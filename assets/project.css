@@ -58,7 +58,13 @@ figure{margin:0;}
   width:100%;height:100%;max-height:none;
   object-fit:cover;filter:none;opacity:1;
 }
+/* full-colour marks print as supplied — no ink conversion */
+.plate.colour img{filter:none;opacity:1;width:70%;}
 figcaption{margin-top:.6rem;color:var(--stone);}
+.figlink{text-decoration:none;color:inherit;display:block;}
+.figlink .plate{transition:box-shadow .3s var(--ease);}
+.figlink:hover .plate,.figlink:focus-visible .plate{box-shadow:inset 0 0 0 1px rgba(31,28,27,.13),4px 4px 0 0 var(--ochre);}
+.figlink figcaption{color:var(--ox);display:flex;align-items:center;gap:.45rem;}
 .foot{
   border-top:1px solid rgba(31,28,27,.22);padding-block:1.25rem 2.5rem;
   display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;color:var(--stone);
