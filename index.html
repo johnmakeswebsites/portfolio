@@ -202,17 +202,37 @@ img,canvas{max-width:100%;display:block;}
 .card:hover .card-plate,.card:focus-visible .card-plate{transform:translate(-5px,-5px);box-shadow:5px 5px 0 0 var(--ochre);}
 .card:focus-visible{outline:none;}
 .card:focus-visible .card-plate{outline:2px solid var(--ox);outline-offset:4px;}
-.card-art{position:absolute;inset:0;}
-/* every ink shape multiplies, so overlaps print as the third colour */
-.card-art span{position:absolute;mix-blend-mode:multiply;}
-/* a knockout is bare paper showing through the plate — never an ink */
-.card-art span.knock{mix-blend-mode:normal;}
+/* Each plate is a two-ink field with the client's mark knocked out of it.
+   Same inks throughout, rotated axis and mix per card, so the four read as
+   one print run rather than four unrelated tiles. */
+.card-art{position:absolute;inset:0;background:var(--art);}
+/* the halftone: ink screen over the field, coarse enough to see at card size */
+.card-art::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(244,240,233,.14) 1px,transparent 1.4px);
+  background-size:7px 7px;
+  mix-blend-mode:soft-light;
+}
+.art-01{--art:linear-gradient(152deg,#96413B 0%,#57190B 58%,#2A0C06 100%);}
+.art-02{--art:linear-gradient(118deg,#B5883F 0%,#96413B 46%,#63201C 100%);}
+.art-03{--art:linear-gradient(165deg,#4A403C 0%,#6B2018 62%,#8A352F 100%);}
+.art-04{--art:radial-gradient(120% 110% at 28% 22%,#C2954A 0%,#96413B 42%,#4B1613 100%);}
+/* mark sits on the plate; widths are tuned per logo so a badge and a long
+   wordmark carry the same optical weight, not the same measurement */
+.card-logo{
+  position:absolute;left:50%;top:50%;
+  width:var(--logo-w);max-height:56%;
+  transform:translate(-50%,-50%);
+  object-fit:contain;z-index:1;
+  transition:transform .4s var(--ease);
+}
+.card:hover .card-logo,.card:focus-visible .card-logo{transform:translate(-50%,-50%) scale(1.03);}
 
-.crop{position:absolute;width:15px;height:15px;pointer-events:none;opacity:.6;z-index:2;}
-.crop-tl{top:10px;left:10px;border-top:1px solid var(--ink);border-left:1px solid var(--ink);}
-.crop-tr{top:10px;right:10px;border-top:1px solid var(--ink);border-right:1px solid var(--ink);}
-.crop-bl{bottom:10px;left:10px;border-bottom:1px solid var(--ink);border-left:1px solid var(--ink);}
-.crop-br{bottom:10px;right:10px;border-bottom:1px solid var(--ink);border-right:1px solid var(--ink);}
+.crop{position:absolute;width:15px;height:15px;pointer-events:none;opacity:.7;z-index:2;}
+.crop-tl{top:10px;left:10px;border-top:1px solid rgba(244,240,233,.75);border-left:1px solid rgba(244,240,233,.75);}
+.crop-tr{top:10px;right:10px;border-top:1px solid rgba(244,240,233,.75);border-right:1px solid rgba(244,240,233,.75);}
+.crop-bl{bottom:10px;left:10px;border-bottom:1px solid rgba(244,240,233,.75);border-left:1px solid rgba(244,240,233,.75);}
+.crop-br{bottom:10px;right:10px;border-bottom:1px solid rgba(244,240,233,.75);border-right:1px solid rgba(244,240,233,.75);}
 .card-idx{position:absolute;top:11px;right:11px;z-index:2;background:var(--ink);color:var(--paper);padding:.28rem .5rem;border-radius:2px;}
 .card-meta{display:flex;align-items:center;gap:.6rem;color:var(--ox);}
 .card-title{display:flex;align-items:baseline;gap:.6rem;transition:color .25s var(--ease);}
@@ -244,7 +264,7 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
 @media (prefers-reduced-motion:reduce){
   .js-reveal .reveal{opacity:1;transform:none;}
   .dot{animation:none;}
-  .card-plate{transition:none;}
+  .card-plate,.card-logo{transition:none;}
 }
 </style>
 </head>
@@ -331,9 +351,8 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
 
       <div class="card reveal">
         <div class="card-plate">
-          <div class="card-art">
-            <span style="left:12%;top:14%;width:46%;aspect-ratio:1;border-radius:50%;background:var(--ox);"></span>
-            <span style="left:38%;top:14%;width:46%;aspect-ratio:1;border-radius:50%;background:var(--ochre);"></span>
+          <div class="card-art art-01">
+            <img class="card-logo" src="assets/blond-in-car.png" alt="Blond in Car" loading="lazy" style="--logo-w:50%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
@@ -348,13 +367,8 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
 
       <div class="card reveal">
         <div class="card-plate">
-          <div class="card-art">
-            <span style="left:11%;top:14%;width:78%;height:70%;border-radius:4px;background:var(--ox);"></span>
-            <span class="knock" style="left:17%;top:24%;width:40%;height:7%;background:var(--paper);"></span>
-            <span style="left:17%;top:37%;width:58%;height:5%;background:var(--ochre);"></span>
-            <span style="left:17%;top:47%;width:46%;height:5%;background:var(--ochre);"></span>
-            <span style="left:17%;top:60%;width:24%;height:14%;background:var(--ochre);"></span>
-            <span class="knock" style="left:62%;top:57%;width:22%;height:20%;background:var(--paper);"></span>
+          <div class="card-art art-02">
+            <img class="card-logo" src="assets/vista.png" alt="Vista Speech &amp; Swallowing" loading="lazy" style="--logo-w:68%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
@@ -369,12 +383,8 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
 
       <div class="card reveal">
         <div class="card-plate">
-          <div class="card-art">
-            <span style="left:10%;top:13%;width:25%;height:74%;background:var(--ox);"></span>
-            <span style="left:38%;top:13%;width:23%;height:34%;background:var(--ochre);"></span>
-            <span style="left:64%;top:13%;width:26%;height:34%;background:var(--ox);"></span>
-            <span style="left:38%;top:53%;width:52%;height:34%;background:var(--ochre);"></span>
-            <span style="left:22%;top:13%;width:20%;height:74%;background:var(--ochre);"></span>
+          <div class="card-art art-03">
+            <img class="card-logo" src="assets/aural-analytics.png" alt="Aural Analytics" loading="lazy" style="--logo-w:68%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
@@ -389,9 +399,8 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
 
       <div class="card reveal">
         <div class="card-plate">
-          <div class="card-art">
-            <span style="left:0;bottom:0;width:100%;height:62%;background:var(--ochre);clip-path:polygon(0 100%,0 46%,26% 8%,52% 52%,78% 0,100% 34%,100% 100%);"></span>
-            <span style="left:0;bottom:0;width:100%;height:44%;background:var(--ox);clip-path:polygon(0 100%,0 52%,26% 20%,52% 62%,78% 12%,100% 42%,100% 100%);"></span>
+          <div class="card-art art-04">
+            <img class="card-logo" src="assets/john-caviness-music.png" alt="John Caviness Music" loading="lazy" style="--logo-w:66%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
