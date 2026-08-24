@@ -53,6 +53,11 @@ figure{margin:0;}
   position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   width:62%;max-height:52%;object-fit:contain;filter:brightness(0);opacity:.82;
 }
+.plate.shot img{
+  position:static;transform:none;
+  width:100%;height:100%;max-height:none;
+  object-fit:cover;filter:none;opacity:1;
+}
 figcaption{margin-top:.6rem;color:var(--stone);}
 .foot{
   border-top:1px solid rgba(31,28,27,.22);padding-block:1.25rem 2.5rem;
