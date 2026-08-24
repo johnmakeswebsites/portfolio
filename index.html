@@ -29,6 +29,7 @@
   --ochre-pale:#D9BC85;
   --overprint:#57190B;   /* where the two plates cross */
   --stone:#8C8073;
+  --plate:#FBF9F4;      /* work tiles: a shade up from the page stock */
 
   --fs-display:clamp(2.9rem,7.2vw,6.5rem);
   --fs-h2:clamp(2rem,4.6vw,3.7rem);
@@ -53,13 +54,6 @@ body{
   font-size:1.0625rem;line-height:1.6;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
-}
-
-/* Paper tooth. Ink is never fully opaque — the stock speckles through. */
-body::after{
-  content:"";position:fixed;inset:-50%;z-index:9999;pointer-events:none;
-  opacity:.16;mix-blend-mode:multiply;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='220' height='220' filter='url(%23n)' opacity='0.5'/></svg>");
 }
 
 img,canvas{max-width:100%;display:block;}
@@ -175,64 +169,59 @@ img,canvas{max-width:100%;display:block;}
 .sec-head .label{color:var(--ox);display:flex;align-items:center;gap:.65rem;}
 .sec-head-copy{display:grid;gap:1.1rem;}
 .sec-count{color:var(--stone);}
-/* A heading printed twice, the second plate off register.
-   .h2 gets its own stacking context so the z-index:-1 ghost lands
-   behind the type but still in front of the section's paper. */
-.h2{position:relative;z-index:0;}
-.misreg{position:relative;display:inline-block;}
-.misreg::before{
-  content:attr(data-ghost);
-  position:absolute;left:0;top:0;
-  color:var(--ochre);
-  transform:translate(4px,4px);
-  z-index:-1;
-  white-space:pre-line;
-  pointer-events:none;
-}
-
+.h2{position:relative;}
 .work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(2rem,4vw,3.25rem) clamp(1.75rem,3vw,3rem);}
+/* cards share the grid's rows, so plate, labels, titles and copy each sit
+   on one baseline across a row regardless of how long the text runs */
+@supports (grid-template-rows:subgrid){
+  .work-grid{grid-auto-rows:auto;}
+  .card{grid-row:span 4;grid-template-rows:subgrid;gap:0;}
+  .card-plate{margin-bottom:1.25rem;}
+  .card-meta{margin-bottom:.55rem;}
+  .card-title{margin-bottom:.35rem;}
+}
 @media (max-width:800px){.work-grid{grid-template-columns:1fr;}}
 
 .card{display:grid;gap:1.25rem;text-decoration:none;color:inherit;}
+.card-role{
+  color:var(--ox);display:inline-flex;align-items:center;gap:.5rem;margin-top:.7rem;
+}
+.card-role::before{content:"";width:14px;height:1px;background:var(--ochre);flex:none;}
 .card-plate{
   position:relative;aspect-ratio:4/3;border-radius:3px;overflow:hidden;
-  background:var(--paper-2);
+  background:var(--plate);box-shadow:inset 0 0 0 1px rgba(31,28,27,.13);
   transition:transform .4s var(--ease),box-shadow .4s var(--ease);
 }
-.card:hover .card-plate,.card:focus-visible .card-plate{transform:translate(-5px,-5px);box-shadow:5px 5px 0 0 var(--ochre);}
+.card:hover .card-plate,.card:focus-visible .card-plate{transform:translate(-5px,-5px);box-shadow:inset 0 0 0 1px rgba(31,28,27,.13),5px 5px 0 0 var(--ochre);}
 .card:focus-visible{outline:none;}
 .card:focus-visible .card-plate{outline:2px solid var(--ox);outline-offset:4px;}
-/* Each plate is a two-ink field with the client's mark knocked out of it.
-   Same inks throughout, rotated axis and mix per card, so the four read as
-   one print run rather than four unrelated tiles. */
-.card-art{position:absolute;inset:0;background:var(--art);}
-/* the halftone: ink screen over the field, coarse enough to see at card size */
-.card-art::after{
-  content:"";position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(rgba(244,240,233,.14) 1px,transparent 1.4px);
-  background-size:7px 7px;
-  mix-blend-mode:soft-light;
+/* One container for all four: light stock, hairline rule, identical
+   padding. The palette lives in the frame now — brackets, badge, mono
+   labels — so the grid reads as a set whatever the images are. */
+.card-art{position:absolute;inset:0;background:var(--plate);}
+.card-shot{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:50% 50%;
+  transition:transform .5s var(--ease);
 }
-.art-01{--art:linear-gradient(152deg,#96413B 0%,#57190B 58%,#2A0C06 100%);}
-.art-02{--art:linear-gradient(118deg,#B5883F 0%,#96413B 46%,#63201C 100%);}
-.art-03{--art:linear-gradient(165deg,#4A403C 0%,#6B2018 62%,#8A352F 100%);}
-.art-04{--art:radial-gradient(120% 110% at 28% 22%,#C2954A 0%,#96413B 42%,#4B1613 100%);}
-/* mark sits on the plate; widths are tuned per logo so a badge and a long
-   wordmark carry the same optical weight, not the same measurement */
-.card-logo{
+/* interim state: no work photography yet, so the mark prints on the stock.
+   swap .card-mark for .card-shot when the images land — nothing else changes. */
+.card-mark{
   position:absolute;left:50%;top:50%;
-  width:var(--logo-w);max-height:56%;
+  width:var(--logo-w);max-height:52%;
   transform:translate(-50%,-50%);
-  object-fit:contain;z-index:1;
-  transition:transform .4s var(--ease);
+  object-fit:contain;
+  filter:brightness(0);opacity:.82;
+  transition:transform .5s var(--ease);
 }
-.card:hover .card-logo,.card:focus-visible .card-logo{transform:translate(-50%,-50%) scale(1.03);}
+.card:hover .card-shot,.card:focus-visible .card-shot{transform:scale(1.03);}
+.card:hover .card-mark,.card:focus-visible .card-mark{transform:translate(-50%,-50%) scale(1.03);}
 
 .crop{position:absolute;width:15px;height:15px;pointer-events:none;opacity:.7;z-index:2;}
-.crop-tl{top:10px;left:10px;border-top:1px solid rgba(244,240,233,.75);border-left:1px solid rgba(244,240,233,.75);}
-.crop-tr{top:10px;right:10px;border-top:1px solid rgba(244,240,233,.75);border-right:1px solid rgba(244,240,233,.75);}
-.crop-bl{bottom:10px;left:10px;border-bottom:1px solid rgba(244,240,233,.75);border-left:1px solid rgba(244,240,233,.75);}
-.crop-br{bottom:10px;right:10px;border-bottom:1px solid rgba(244,240,233,.75);border-right:1px solid rgba(244,240,233,.75);}
+.crop-tl{top:10px;left:10px;border-top:1px solid rgba(31,28,27,.42);border-left:1px solid rgba(31,28,27,.42);}
+.crop-tr{top:10px;right:10px;border-top:1px solid rgba(31,28,27,.42);border-right:1px solid rgba(31,28,27,.42);}
+.crop-bl{bottom:10px;left:10px;border-bottom:1px solid rgba(31,28,27,.42);border-left:1px solid rgba(31,28,27,.42);}
+.crop-br{bottom:10px;right:10px;border-bottom:1px solid rgba(31,28,27,.42);border-right:1px solid rgba(31,28,27,.42);}
 .card-idx{position:absolute;top:11px;right:11px;z-index:2;background:var(--ink);color:var(--paper);padding:.28rem .5rem;border-radius:2px;}
 .card-meta{display:flex;align-items:center;gap:.6rem;color:var(--ox);}
 .card-title{display:flex;align-items:baseline;gap:.6rem;transition:color .25s var(--ease);}
@@ -336,82 +325,78 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-head-copy">
-        <div class="label">
-          <svg class="reg" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="7" stroke="currentColor" stroke-width="1.4"/>
-            <path d="M12 0v24M0 12h24" stroke="currentColor" stroke-width="1.4"/>
-          </svg>
-          Selected work
-        </div>
-        <h2 class="h2"><span class="misreg" data-ghost="Selected&#10;work.">Selected<br>work.</span></h2>
+        <h2 class="h2">Selected<br>work.</h2>
       </div>
-      <span class="label sec-count">Disciplines</span>
     </div>
         <div class="work-grid">
 
-      <div class="card reveal">
+      <a class="card reveal" href="projects/blond-in-car.html">
         <div class="card-plate">
-          <div class="card-art art-01">
-            <img class="card-logo" src="assets/blond-in-car.png" alt="Blond in Car" loading="lazy" style="--logo-w:50%">
+          <div class="card-art">
+            <img class="card-mark" src="assets/blond-in-car.png" alt="Blond in Car logo" loading="lazy" style="--logo-w:50%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
           <span class="card-idx label">01</span>
         </div>
+        <div class="card-meta label"><span>Brand</span><span>&bull;</span><span>Print</span><span>&bull;</span><span>Web</span></div>
+        <h3 class="h3 card-title">Blond in Car</h3>
         <div>
-          <div class="card-meta label"><span>Brand</span><span>&bull;</span><span>Print</span><span>&bull;</span><span>Web</span></div>
-          <h3 class="h3 card-title">Blond in Car</h3>
-          <p class="card-scope">Logo, vinyl packaging, and Shopify storefront for an Albatross Pictures music label, from identity through the merch that sells under it.</p>
+          <p class="card-scope">Logo, vinyl packaging, and a Shopify storefront for a music label under Albatross Pictures.</p>
+          <span class="card-role label">Identity, packaging and storefront</span>
         </div>
-      </div>
+      </a>
 
-      <div class="card reveal">
+      <a class="card reveal" href="projects/vista-speech-and-swallowing.html">
         <div class="card-plate">
-          <div class="card-art art-02">
-            <img class="card-logo" src="assets/vista.png" alt="Vista Speech &amp; Swallowing" loading="lazy" style="--logo-w:68%">
+          <div class="card-art">
+            <img class="card-mark" src="assets/vista.png" alt="Vista Speech &amp; Swallowing logo" loading="lazy" style="--logo-w:68%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
           <span class="card-idx label">02</span>
         </div>
+        <div class="card-meta label"><span>Brand</span><span>&bull;</span><span>Web</span><span>&bull;</span><span>Search</span></div>
+        <h3 class="h3 card-title">Vista Speech &amp; Swallowing</h3>
         <div>
-          <div class="card-meta label"><span>Brand</span><span>&bull;</span><span>Web</span><span>&bull;</span><span>Search</span></div>
-          <h3 class="h3 card-title">Vista Speech &amp; Swallowing</h3>
-          <p class="card-scope">Identity, website, and local search for a new speech therapy private practice in Denver.</p>
+          <p class="card-scope">Identity, website, and local search for a new speech therapy practice in Denver.</p>
+          <span class="card-role label">Identity, site and local search</span>
         </div>
-      </div>
+      </a>
 
-      <div class="card reveal">
+      <a class="card reveal" href="projects/aural-analytics.html">
         <div class="card-plate">
-          <div class="card-art art-03">
-            <img class="card-logo" src="assets/aural-analytics.png" alt="Aural Analytics" loading="lazy" style="--logo-w:68%">
+          <div class="card-art">
+            <img class="card-mark" src="assets/aural-analytics.png" alt="Aural Analytics logo" loading="lazy" style="--logo-w:68%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
           <span class="card-idx label">03</span>
         </div>
+        <div class="card-meta label"><span>Brand</span><span>&bull;</span><span>Marketing</span></div>
+        <h3 class="h3 card-title">Aural Analytics</h3>
         <div>
-          <div class="card-meta label"><span>Brand</span><span>&bull;</span><span>Marketing</span></div>
-          <h3 class="h3 card-title">Aural Analytics</h3>
-          <p class="card-scope">Company rebrand, sales collateral, and conference marketing for a clinical speech technology startup, working directly with the CEO.</p>
+          <p class="card-scope">Company rebrand, sales collateral, and conference marketing for a clinical speech tech startup.</p>
+          <span class="card-role label">Rebrand lead, reporting to the CEO</span>
         </div>
-      </div>
+      </a>
 
-      <div class="card reveal">
+      <a class="card reveal" href="projects/john-caviness-music.html">
         <div class="card-plate">
-          <div class="card-art art-04">
-            <img class="card-logo" src="assets/john-caviness-music.png" alt="John Caviness Music" loading="lazy" style="--logo-w:66%">
+          <div class="card-art">
+            <img class="card-mark" src="assets/john-caviness-music.png" alt="John Caviness Music logo" loading="lazy" style="--logo-w:66%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
           <span class="card-idx label">04</span>
         </div>
+        <div class="card-meta label"><span>Brand</span><span>&bull;</span><span>Print</span><span>&bull;</span><span>Marketing</span></div>
+        <h3 class="h3 card-title">John Caviness Music</h3>
         <div>
-          <div class="card-meta label"><span>Brand</span><span>&bull;</span><span>Print</span><span>&bull;</span><span>Marketing</span></div>
-          <h3 class="h3 card-title">John Caviness Music</h3>
-          <p class="card-scope">Identity, site, and paid social for a production studio built from scratch. 13M+ streams and multiple Spotify Editorial placements across client releases.</p>
+          <p class="card-scope">My production studio, built from scratch: identity, site, and paid social. 13M+ streams across client releases.</p>
+          <span class="card-role label">My own studio, every part of it</span>
         </div>
-      </div>
+      </a>
 
     </div>
   </div>
