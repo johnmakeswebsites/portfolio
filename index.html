@@ -110,69 +110,6 @@ img,canvas{max-width:100%;display:block;}
 .hero-body{display:grid;gap:clamp(1.5rem,3vw,2.25rem);margin-top:clamp(.75rem,1.2vw,1.1rem);}
 .hero-lede{color:#4A423C;max-width:44ch;border-left:2px solid var(--ochre);padding-left:1.35rem;}
 
-/* ---------- buttons: plates that shift out of register ---------- */
-.cta-row{display:flex;flex-wrap:wrap;gap:.9rem;}
-.btn{
-  position:relative;display:inline-flex;align-items:center;gap:.7rem;
-  padding:.95rem 1.6rem;border-radius:2px;font-weight:500;font-size:.97rem;
-  text-decoration:none;border:1.5px solid transparent;
-  transition:transform .28s var(--ease),box-shadow .28s var(--ease),background-color .28s var(--ease),color .28s var(--ease);
-}
-.btn-solid{background:var(--ox);color:var(--paper);border-color:var(--ox);}
-.btn-solid:hover,.btn-solid:focus-visible{transform:translate(-3px,-3px);box-shadow:3px 3px 0 0 var(--ochre);}
-.btn-ghost{background:transparent;color:var(--ink);border-color:rgba(31,28,27,.4);}
-.btn-ghost:hover,.btn-ghost:focus-visible{transform:translate(-3px,-3px);box-shadow:3px 3px 0 0 var(--ox);border-color:var(--ink);}
-.btn .arw{transition:transform .28s var(--ease);}
-.btn:hover .arw{transform:translateX(4px);}
-.btn:focus-visible{outline:2px solid var(--ochre);outline-offset:4px;}
-
-/* ---------- the halftone portrait ---------- */
-.portrait{position:relative;align-self:end;}
-/* Ink 2 laid down first, off register — a flat plate behind ink 1. */
-.plate-ghost{
-  position:absolute;inset:0;
-  transform:translate(16px,16px);
-  border-radius:4px;
-  background:var(--ochre);
-  pointer-events:none;
-}
-.plate{
-  position:relative;
-  aspect-ratio:4/5;
-  border-radius:4px;
-  overflow:hidden;
-  background:var(--paper-2);
-}
-.plate img{
-  position:absolute;inset:0;width:100%;height:100%;
-  object-fit:cover;object-position:50% 14%;
-}
-.portrait-cap{
-  position:absolute;left:0;bottom:0;z-index:3;
-  display:flex;align-items:center;gap:.6rem;
-  padding:.55rem 1rem;background:var(--ox);color:var(--paper);
-  border-top-right-radius:8px;
-}
-
-/* ============================================================
-   2. MARQUEE — oxblood plate, knockout type
-   ============================================================ */
-.marquee{
-  position:relative;background:var(--ox);color:var(--paper);
-  padding-block:1.15rem;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);
-}
-.marquee-track{position:relative;z-index:2;display:flex;width:max-content;animation:slide 42s linear infinite;}
-.marquee:hover .marquee-track{animation-play-state:paused;}
-.marquee-set{display:flex;align-items:center;gap:2.4rem;padding-right:2.4rem;}
-.marquee-set span{white-space:nowrap;}
-.marquee-set .sep{color:var(--ochre-pale);}
-@keyframes slide{to{transform:translateX(-50%);}}
-@media (prefers-reduced-motion:reduce){
-  .marquee-track{animation:none;}
-  .marquee{-webkit-mask-image:none;mask-image:none;}
-}
 
 /* ============================================================
    3. WORK — bone plate
@@ -241,33 +178,7 @@ img,canvas{max-width:100%;display:block;}
 .cta-inner{display:grid;gap:clamp(2.25rem,4.5vw,3.5rem);}
 .cta-head{display:grid;gap:1.4rem;justify-items:start;}
 .cta .ink-accent{color:var(--ochre-pale);}
-.cta-lede{color:#EBDCD6;max-width:48ch;}
-.cta .btn-solid{background:var(--paper);color:var(--ox);border-color:var(--paper);}
-.cta .btn-solid:hover{box-shadow:3px 3px 0 0 var(--ochre);}
 
-.contact{
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(1.5rem,3vw,2.5rem);
-  padding-top:clamp(2rem,4vw,3rem);border-top:1px solid rgba(244,240,233,.3);
-}
-@media (max-width:760px){.contact{grid-template-columns:1fr;}}
-.contact-col{display:grid;gap:1rem;align-content:start;}
-.contact-col .label{color:#D9BDB6;}
-.mail{
-  font-size:clamp(1.3rem,3vw,2.1rem);font-weight:500;letter-spacing:-.03em;
-  color:var(--paper);text-decoration:none;display:inline-block;word-break:break-word;
-  background-image:linear-gradient(var(--ochre-pale),var(--ochre-pale));
-  background-repeat:no-repeat;background-size:0% 2px;background-position:0 100%;
-  transition:background-size .45s var(--ease);
-}
-.mail:hover,.mail:focus-visible{background-size:100% 2px;}
-.social{display:flex;flex-wrap:wrap;gap:.6rem;}
-.chip{
-  display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1rem;
-  border:1px solid rgba(244,240,233,.45);border-radius:100px;color:var(--paper);
-  text-decoration:none;font-size:.9rem;
-  transition:background-color .25s var(--ease),color .25s var(--ease),transform .25s var(--ease);
-}
-.chip:hover,.chip:focus-visible{background:var(--paper);color:var(--ox);transform:translateY(-2px);}
 .foot{
   display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
   margin-top:clamp(1.5rem,3vw,2.5rem);padding-top:1.25rem;
@@ -281,7 +192,7 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
 @media (prefers-reduced-motion:reduce){
   .js-reveal .reveal{opacity:1;transform:none;}
   .dot{animation:none;}
-  .btn,.card-plate,.chip{transition:none;}
+  .card-plate{transition:none;}
 }
 </style>
 </head>
