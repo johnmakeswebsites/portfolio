@@ -30,6 +30,12 @@ jobs:
         with:
           enablement: true
 
+      # source/ holds the full-resolution masters the site assets are cut
+      # from. They are versioned but never linked, so keep them out of the
+      # published artifact rather than shipping several MB of unused PNGs.
+      - name: Drop non-published files from the artifact
+        run: rm -rf source
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
