@@ -15,7 +15,7 @@
 <style>
 /* ============================================================
    TWO INKS, ONE PASS.
-   Oxblood and ochre on bone stock. Riso mechanics — overprint,
+   Oxblood and vermilion on bone stock. Riso mechanics — overprint,
    halftone, misregistration, knockout — with a grown-up palette.
    Single committed visual world; every colour painted explicitly.
    ============================================================ */
@@ -25,9 +25,9 @@
   --ink:#1F1C1B;
   --ox:#7A2E2B;          /* ink 1 */
   --ox-lift:#96413B;
-  --ochre:#B5883F;       /* ink 2 */
-  --ochre-pale:#D9BC85;
-  --overprint:#57190B;   /* where the two plates cross */
+  --vermilion:#D2542E;   /* ink 2 */
+  --vermilion-pale:#F2B39A;
+  --overprint:#640F07;   /* where the two plates cross */
   --stone:#8C8073;
   --plate:#FBF9F4;      /* work tiles: a shade up from the page stock */
 
@@ -102,7 +102,7 @@ img,canvas{max-width:100%;display:block;}
 @media (max-width:900px){.hero-grid{grid-template-columns:1fr;align-items:start;}}
 .hero-eyebrow{display:flex;align-items:center;gap:.7rem;color:var(--stone);margin-bottom:clamp(1.25rem,2.5vw,2rem);}
 .hero-body{display:grid;gap:clamp(1.5rem,3vw,2.25rem);margin-top:clamp(.75rem,1.2vw,1.1rem);}
-.hero-lede{color:#4A423C;max-width:44ch;border-left:2px solid var(--ochre);padding-left:1.35rem;}
+.hero-lede{color:#4A423C;max-width:44ch;border-left:2px solid var(--vermilion);padding-left:1.35rem;}
 
 /* ---------- the halftone portrait ---------- */
 .portrait{position:relative;justify-self:end;width:100%;}
@@ -114,7 +114,7 @@ img,canvas{max-width:100%;display:block;}
   position:absolute;inset:0;
   transform:translate(16px,16px);
   border-radius:4px;
-  background:var(--ochre);
+  background:var(--vermilion);
   pointer-events:none;
 }
 .plate{
@@ -148,7 +148,7 @@ img,canvas{max-width:100%;display:block;}
 .marquee:hover .marquee-track{animation-play-state:paused;}
 .marquee-set{display:flex;align-items:center;gap:2.4rem;padding-right:2.4rem;}
 .marquee-set span{white-space:nowrap;}
-.marquee-set .sep{color:var(--ochre-pale);}
+.marquee-set .sep{color:var(--vermilion-pale);}
 @keyframes slide{to{transform:translateX(-50%);}}
 @media (prefers-reduced-motion:reduce){
   .marquee-track{animation:none;}
@@ -186,13 +186,13 @@ img,canvas{max-width:100%;display:block;}
 .card-role{
   color:var(--ox);display:inline-flex;align-items:center;gap:.5rem;margin-top:.7rem;
 }
-.card-role::before{content:"";width:14px;height:1px;background:var(--ochre);flex:none;}
+.card-role::before{content:"";width:14px;height:1px;background:var(--vermilion);flex:none;}
 .card-plate{
   position:relative;aspect-ratio:4/3;border-radius:3px;overflow:hidden;
   background:var(--plate);box-shadow:inset 0 0 0 1px rgba(31,28,27,.13);
   transition:transform .4s var(--ease),box-shadow .4s var(--ease);
 }
-.card:hover .card-plate,.card:focus-visible .card-plate{transform:translate(-5px,-5px);box-shadow:inset 0 0 0 1px rgba(31,28,27,.13),5px 5px 0 0 var(--ochre);}
+.card:hover .card-plate,.card:focus-visible .card-plate{transform:translate(-5px,-5px);box-shadow:inset 0 0 0 1px rgba(31,28,27,.13),5px 5px 0 0 var(--vermilion);}
 .card:focus-visible{outline:none;}
 .card:focus-visible .card-plate{outline:2px solid var(--ox);outline-offset:4px;}
 /* One container for all four: light stock, hairline rule, identical
@@ -240,14 +240,14 @@ img,canvas{max-width:100%;display:block;}
 .cta > *{position:relative;z-index:2;}
 .cta-inner{display:grid;gap:clamp(2.25rem,4.5vw,3.5rem);}
 .cta-head{display:grid;gap:1.4rem;justify-items:start;}
-.cta .ink-accent{color:var(--ochre-pale);}
+.cta .ink-accent{color:var(--vermilion-pale);}
 
 .foot{
   display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
   margin-top:clamp(1.5rem,3vw,2.5rem);padding-top:1.25rem;
   border-top:1px solid rgba(244,240,233,.22);color:#D3B6AF;
 }
-a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:2px;}
+a:focus-visible{outline:2px solid var(--vermilion);outline-offset:3px;border-radius:2px;}
 
 /* ---------- scroll reveal (JS-gated) ---------- */
 .js-reveal .reveal{opacity:0;transform:translateY(16px);}
@@ -412,7 +412,7 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
     </div>
 
     <div class="foot label">
-      <span>Mountain Time &nbsp;&middot;&nbsp; Oxblood &amp; ochre on bone &nbsp;&middot;&nbsp; &copy; 2026</span>
+      <span>Mountain Time &nbsp;&middot;&nbsp; Oxblood &amp; vermilion on bone &nbsp;&middot;&nbsp; &copy; 2026</span>
     </div>
   </div>
 </section>
