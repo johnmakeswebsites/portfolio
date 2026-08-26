@@ -84,17 +84,21 @@ img,canvas{max-width:100%;display:block;}
   padding-block:1.1rem;border-bottom:1px solid rgba(31,28,27,.22);color:var(--stone);
 }
 .rail-left{display:flex;align-items:center;gap:.7rem;color:var(--ink);}
-.status{
-  display:inline-flex;align-items:center;gap:.55rem;
-  padding:.4rem .85rem .4rem .7rem;border-radius:100px;color:var(--ox);
-  /* same bubble as the work-section eyebrow: a wash of its own ink, hairline inside */
-  background:rgba(122,46,43,.1);box-shadow:inset 0 0 0 1px rgba(122,46,43,.28);
+/* the pill: one shape shared by the availability badge and the section
+   eyebrows — vermilion type over a wash of the same ink, hairline inside */
+.status,.sec-eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.4rem .8rem;border-radius:999px;
+  color:var(--vermilion);
+  background:rgba(210,84,46,.12);
+  box-shadow:inset 0 0 0 1px rgba(210,84,46,.3);
 }
+.status .dot,.sec-eyebrow .dot{background:var(--vermilion);}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--ox);animation:pulse 2.6s var(--ease) infinite;}
 @keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(122,46,43,.55);}
-  70%{box-shadow:0 0 0 7px rgba(122,46,43,0);}
-  100%{box-shadow:0 0 0 0 rgba(122,46,43,0);}
+  0%{box-shadow:0 0 0 0 rgba(210,84,46,.55);}
+  70%{box-shadow:0 0 0 7px rgba(210,84,46,0);}
+  100%{box-shadow:0 0 0 0 rgba(210,84,46,0);}
 }
 
 .hero-grid{
@@ -170,18 +174,12 @@ img,canvas{max-width:100%;display:block;}
   padding-bottom:1.5rem;border-bottom:1px solid rgba(31,28,27,.22);
   margin-bottom:clamp(2.5rem,5vw,4rem);
 }
-.sec-head .label{color:var(--ox);display:flex;align-items:center;gap:.65rem;}
+.sec-head .label:not(.sec-eyebrow){color:var(--ox);display:flex;align-items:center;gap:.65rem;}
 .sec-head-copy{display:grid;gap:1.1rem;max-width:52ch;}
 .sec-count{color:var(--stone);}
 /* the eyebrow prints in vermilion over a pale wash of the same ink, so the
    head carries both plates before the grid does */
-.sec-eyebrow{
-  justify-self:start;color:var(--vermilion);
-  display:inline-flex;align-items:center;gap:.6rem;
-  padding:.4rem .8rem;border-radius:999px;
-  background:rgba(210,84,46,.12);box-shadow:inset 0 0 0 1px rgba(210,84,46,.3);
-}
-.sec-eyebrow .dot{background:var(--vermilion);}
+.sec-eyebrow{justify-self:start;}
 .sec-lede{color:#4A423C;max-width:46ch;}
 .sec-count{display:flex;align-items:center;gap:.65rem;}
 .sec-count::before{content:"";width:22px;height:1px;background:var(--ox);flex:none;}
