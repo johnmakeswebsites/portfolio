@@ -84,15 +84,21 @@ img,canvas{max-width:100%;display:block;}
   padding-block:1.1rem;border-bottom:1px solid rgba(31,28,27,.22);color:var(--stone);
 }
 .rail-left{display:flex;align-items:center;gap:.7rem;color:var(--ink);}
-.status{
-  display:inline-flex;align-items:center;gap:.55rem;
-  padding:.4rem .85rem .4rem .7rem;border:1px solid var(--ox);border-radius:100px;color:var(--ox);
+/* the pill: one shape shared by the availability badge and the section
+   eyebrows — vermilion type over a wash of the same ink, hairline inside */
+.status,.sec-eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.4rem .8rem;border-radius:999px;
+  color:var(--vermilion);
+  background:rgba(210,84,46,.12);
+  box-shadow:inset 0 0 0 1px rgba(210,84,46,.3);
 }
+.status .dot,.sec-eyebrow .dot{background:var(--vermilion);}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--ox);animation:pulse 2.6s var(--ease) infinite;}
 @keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(122,46,43,.55);}
-  70%{box-shadow:0 0 0 7px rgba(122,46,43,0);}
-  100%{box-shadow:0 0 0 0 rgba(122,46,43,0);}
+  0%{box-shadow:0 0 0 0 rgba(210,84,46,.55);}
+  70%{box-shadow:0 0 0 7px rgba(210,84,46,0);}
+  100%{box-shadow:0 0 0 0 rgba(210,84,46,0);}
 }
 
 .hero-grid{
@@ -123,6 +129,8 @@ img,canvas{max-width:100%;display:block;}
   border-radius:4px;
   overflow:hidden;
   background:var(--paper-2);
+  /* lifts the photo off the oxblood plate behind it — warm ink, not black */
+  box-shadow:0 2px 6px rgba(31,28,27,.14),0 12px 28px rgba(31,28,27,.20);
 }
 .plate img{
   position:absolute;inset:0;width:100%;height:100%;
@@ -166,9 +174,15 @@ img,canvas{max-width:100%;display:block;}
   padding-bottom:1.5rem;border-bottom:1px solid rgba(31,28,27,.22);
   margin-bottom:clamp(2.5rem,5vw,4rem);
 }
-.sec-head .label{color:var(--ox);display:flex;align-items:center;gap:.65rem;}
-.sec-head-copy{display:grid;gap:1.1rem;}
+.sec-head .label:not(.sec-eyebrow){color:var(--ox);display:flex;align-items:center;gap:.65rem;}
+.sec-head-copy{display:grid;gap:1.1rem;max-width:52ch;}
 .sec-count{color:var(--stone);}
+/* the eyebrow prints in vermilion over a pale wash of the same ink, so the
+   head carries both plates before the grid does */
+.sec-eyebrow{justify-self:start;}
+.sec-lede{color:#4A423C;max-width:46ch;}
+.sec-count{display:flex;align-items:center;gap:.65rem;}
+.sec-count::before{content:"";width:22px;height:1px;background:var(--ox);flex:none;}
 .h2{position:relative;}
 .work-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(2rem,4vw,3.25rem) clamp(1.75rem,3vw,3rem);}
 /* cards share the grid's rows, so plate, labels, titles and copy each sit
@@ -327,8 +341,14 @@ a:focus-visible{outline:2px solid var(--vermilion);outline-offset:3px;border-rad
   <div class="wrap">
     <div class="sec-head reveal">
       <div class="sec-head-copy">
-        <h2 class="h2">Selected<br>work.</h2>
+        <p class="label sec-eyebrow"><span class="dot" aria-hidden="true"></span>Portfolio</p>
+        <h2 class="h2">Selected <span class="ink-accent">work.</span></h2>
+        <p class="lede sec-lede">
+          Brands, the sites they live on, and the print that goes with them &mdash;
+          four projects taken from the first mark through to press.
+        </p>
       </div>
+      <p class="label sec-count">Four projects</p>
     </div>
         <div class="work-grid">
 
