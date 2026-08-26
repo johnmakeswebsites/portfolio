@@ -214,6 +214,8 @@ img,canvas{max-width:100%;display:block;}
   filter:brightness(0);opacity:.82;
   transition:transform .5s var(--ease);
 }
+/* full-colour marks print as supplied — no ink conversion */
+.card-mark.colour{filter:none;opacity:1;}
 .card:hover .card-shot,.card:focus-visible .card-shot{transform:scale(1.03);}
 .card:hover .card-mark,.card:focus-visible .card-mark{transform:translate(-50%,-50%) scale(1.03);}
 
@@ -333,7 +335,7 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
       <a class="card reveal" href="projects/blond-in-car.html">
         <div class="card-plate">
           <div class="card-art">
-            <img class="card-mark" src="assets/blond-in-car.png" alt="Blond in Car logo" loading="lazy" style="--logo-w:50%">
+            <img class="card-mark colour" src="assets/blond-in-car-color.png" alt="Blond in Car logo" loading="lazy" style="--logo-w:50%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
@@ -367,7 +369,7 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
       <a class="card reveal" href="projects/aural-analytics.html">
         <div class="card-plate">
           <div class="card-art">
-            <img class="card-mark" src="assets/aural-analytics.png" alt="Aural Analytics logo" loading="lazy" style="--logo-w:68%">
+            <img class="card-mark colour" src="assets/aural-analytics-color.png" alt="Aural Analytics logo" loading="lazy" style="--logo-w:68%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
@@ -384,14 +386,14 @@ a:focus-visible{outline:2px solid var(--ochre);outline-offset:3px;border-radius:
       <a class="card reveal" href="projects/john-caviness-music.html">
         <div class="card-plate">
           <div class="card-art">
-            <img class="card-mark" src="assets/john-caviness-music.png" alt="John Caviness Music logo" loading="lazy" style="--logo-w:66%">
+            <img class="card-mark colour" src="assets/john-caviness-music-color.png" alt="John makes songs. wordmark" loading="lazy" style="--logo-w:40%">
           </div>
           <span class="crop crop-tl"></span><span class="crop crop-tr"></span>
           <span class="crop crop-bl"></span><span class="crop crop-br"></span>
           <span class="card-idx label">04</span>
         </div>
         <div class="card-meta label"><span>Brand</span><span>&bull;</span><span>Print</span><span>&bull;</span><span>Marketing</span></div>
-        <h3 class="h3 card-title">John Caviness Music</h3>
+        <h3 class="h3 card-title">John makes songs.</h3>
         <div>
           <p class="card-scope">My production studio, built from scratch: identity, site, and paid social. 13M+ streams across client releases.</p>
           <span class="card-role label">My own studio, every part of it</span>
