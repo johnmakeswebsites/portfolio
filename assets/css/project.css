@@ -118,3 +118,15 @@ a:focus-visible{outline:2px solid var(--vermilion);outline-offset:3px;border-rad
   .lightbox[open] .lightbox-fig{animation:lightbox-in .32s var(--ease) both;}
 }
 @keyframes lightbox-in{from{opacity:0;transform:translate(-50%,-48%) scale(.98);}}
+.lightbox-step{
+  position:absolute;top:50%;transform:translateY(-50%);z-index:1;
+  display:flex;align-items:center;justify-content:center;
+  width:clamp(2.75rem,7vw,3.5rem);aspect-ratio:1;
+  border:0;border-radius:50%;background:rgba(244,240,233,.1);
+  color:var(--paper);opacity:.72;cursor:pointer;
+  transition:opacity .2s var(--ease),background .2s var(--ease);
+}
+.lightbox-step:hover,.lightbox-step:focus-visible{opacity:1;background:rgba(244,240,233,.2);}
+.lightbox-step:focus-visible{outline:2px solid var(--vermilion);outline-offset:2px;}
+.lightbox-prev{left:clamp(.4rem,2vw,1.5rem);}
+.lightbox-next{right:clamp(.4rem,2vw,1.5rem);}
