@@ -40,6 +40,7 @@ h1{font-size:var(--fs-h1);font-weight:600;line-height:1.02;letter-spacing:-.035e
   color:#4A423C;
 }
 .body{padding-bottom:clamp(3rem,6vw,5rem);display:grid;gap:2.25rem;}
+.tools{color:var(--ox);display:flex;flex-wrap:wrap;gap:.6rem;}
 .body h2{font-size:1.05rem;font-weight:600;letter-spacing:-.01em;margin:0 0 .5rem;}
 .body p{margin:0 0 .85rem;max-width:64ch;}
 .body p:last-child{margin-bottom:0;}
@@ -69,4 +70,6 @@ figcaption{margin-top:.6rem;color:var(--stone);}
   border-top:1px solid rgba(31,28,27,.22);padding-block:1.25rem 2.5rem;
   display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;color:var(--stone);
 }
+.foot-mail{color:inherit;text-decoration:underline;text-underline-offset:2px;}
+.foot-mail:hover,.foot-mail:focus-visible{color:var(--ox);}
 a:focus-visible{outline:2px solid var(--vermilion);outline-offset:3px;border-radius:2px;}
