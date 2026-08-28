@@ -12,6 +12,7 @@ assets/               everything the site actually loads
   css/project.css     styles for the project pages
   img/logos/          client marks, full colour, trimmed to their bounding box
   img/work/           photography and mockups
+  img/john-caviness.jpg   1200x630 share image, referenced by the home page og:image
 source/               full-resolution masters — versioned, never linked
 sitemap.xml           list the project pages here when one is added
 .github/workflows/pages.yml   deploys `main` to GitHub Pages on push
