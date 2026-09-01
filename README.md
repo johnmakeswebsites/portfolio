@@ -14,9 +14,21 @@ assets/               everything the site actually loads
   img/work/           photography and mockups
   img/john-caviness.jpg   1200x630 share image, referenced by the home page og:image
 source/               full-resolution masters — versioned, never linked
-sitemap.xml           list the project pages here when one is added
 .github/workflows/pages.yml   deploys `main` to GitHub Pages on push
 ```
+
+## Visibility
+
+The site is unlisted: every page carries `<meta name="robots" content="noindex,
+nofollow">`, and there is no `sitemap.xml`. `robots.txt` deliberately allows
+crawling — a crawler must fetch a page to read its `noindex`, so disallowing
+would suppress the tag and leave the URLs eligible for a bare listing. Adding a
+page means adding the `noindex` tag to it. To launch publicly, drop the tags
+from every page and restore a sitemap.
+
+Note that unlisted is not private: the repo is public for GitHub Pages to serve
+it for free, and anyone with a URL can read the site. Well-behaved crawlers
+honour `noindex`; nothing forces the rest to.
 
 ## Asset conventions
 

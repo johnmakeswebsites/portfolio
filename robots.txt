@@ -1,4 +1,6 @@
+# The site is unlisted. Crawling stays allowed on purpose: every page serves
+# <meta name="robots" content="noindex, nofollow">, and a crawler has to fetch
+# a page to see that tag. Disallowing here would hide the noindex and leave the
+# URLs eligible for a bare, snippet-less listing instead.
 User-agent: *
 Allow: /
-
-Sitemap: https://johnmakeswebsites.github.io/portfolio/sitemap.xml
